@@ -65,7 +65,9 @@ async function main() {
   const data = [];
   data.columns = ["date", ...options];
   for await (const f of files) {
-    const mesas = await readCsv(f);
+    const mesas = (await readCsv(f)).filter(
+      (d) => d["CANDIDATURA"] === "PRESIDENTE"
+    );
     const date = dateFromName(f);
     const newElement = { date };
     for (const option of options) {
